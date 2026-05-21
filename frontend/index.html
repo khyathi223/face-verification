@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Face Verification Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">AI Face Verification</p>
+          <h1>Registered-face verification dashboard</h1>
+        </div>
+        <div class="status" id="modelStatus">Checking model...</div>
+      </section>
+
+      <section class="layout">
+        <div class="panel controls">
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="verify">Verify</button>
+            <button class="tab" data-tab="detect">Detect</button>
+            <button class="tab" data-tab="register">Register</button>
+            <button class="tab" data-tab="webcam">Webcam</button>
+          </div>
+
+          <form id="verifyForm" class="pane active">
+            <label class="file-picker">
+              <span>Choose image</span>
+              <input name="image" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required />
+            </label>
+            <button type="submit">Verify face</button>
+          </form>
+
+          <form id="detectForm" class="pane">
+            <label class="file-picker">
+              <span>Choose image</span>
+              <input name="image" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required />
+            </label>
+            <button type="submit">Detect faces</button>
+          </form>
+
+          <form id="registerForm" class="pane">
+            <input name="name" placeholder="Name" autocomplete="name" required />
+            <input name="user_id" placeholder="User ID" autocomplete="off" required />
+            <label class="file-picker">
+              <span>Face image</span>
+              <input name="image" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required />
+            </label>
+            <button type="submit">Register user</button>
+          </form>
+
+          <div id="webcamPane" class="pane">
+            <div class="camera-wrap">
+              <video id="video" autoplay playsinline muted></video>
+              <canvas id="snapshot" hidden></canvas>
+            </div>
+            <div class="button-row">
+              <button id="startCamera" type="button">Start webcam</button>
+              <button id="stopCamera" type="button" class="secondary">Stop</button>
+            </div>
+          </div>
+
+          <section class="users">
+            <div class="section-head">
+              <h2>Registered users</h2>
+              <button class="ghost" id="refreshUsers" type="button">Refresh</button>
+            </div>
+            <div id="usersList" class="users-list"></div>
+          </section>
+        </div>
+
+        <div class="panel results">
+          <div class="metrics">
+            <div>
+              <span>Detected faces</span>
+              <strong id="faceCount">0</strong>
+            </div>
+            <div>
+              <span>Result</span>
+              <strong id="resultText">Waiting for input</strong>
+            </div>
+          </div>
+
+          <div class="image-stage">
+            <img id="processedImage" alt="Processed face detection result" />
+            <div id="emptyState">Upload an image or start the webcam.</div>
+          </div>
+
+          <div class="faces" id="facesList"></div>
+          <a id="downloadLink" class="download" href="#" download>Download processed image</a>
+        </div>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
+
